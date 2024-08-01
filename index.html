@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>TO-DO LIST <span>APP</span></h1>
+        <div id="newtask">
+            <input type="text" placeholder="Task to be done .....">
+            <button id="push">Add</button>
+        </div>
+        <div id="tasks"></div>
+    </div>
+
+    <script type="text/javascript">
+        document.querySelector('#push').onclick = function(){
+            const taskInput = document.querySelector('#newtask input');
+            if(taskInput.value.length == 0){
+                alert('Please Enter A Task');
+            } else {
+                document.querySelector('#tasks').innerHTML += `
+                <div class="task">
+                    <span id="taskname">
+                        ${taskInput.value}
+                    </span>
+                    <button class="delete">
+                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                    </button>
+                </div>
+                `;
+                taskInput.value = '';
+                addDeleteFunctionality();
+            }
+        }
+
+        function addDeleteFunctionality() {
+            const current_tasks = document.querySelectorAll('.delete');
+            current_tasks.forEach((deleteBtn) => {
+                deleteBtn.onclick = function() {
+                    this.parentNode.remove();
+                }
+            });
+        }
+
+        // Initialize delete functionality on load
+        addDeleteFunctionality();
+    </script>
+</body>
+</html>
